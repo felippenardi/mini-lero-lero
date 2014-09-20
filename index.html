@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html ng-app="leroLeroApp">
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script data-require="prefixfree@*" data-semver="1.0.7" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    
+    <script src="https://code.angularjs.org/1.2.9/angular.js"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+  
+    <div class="wrapper">
+      <div class="content" ng-controller="MainCtrl">
+      
+        <div class="side">
+          <div class="ovelha"> 
+          
+            <h1>Lero Lero</h1>
+            
+            <a ng-click="gerarFrase()" href="">
+              Gerar frase
+            </a>
+            
+          </div>
+        </div>
+        
+        <article class="main">
+          <blockquote class="frase">
+            {{ frase }}
+          </blockquote>  
+          <a tweet-link
+             sentence="frase">Tuitar</a>
+             
+        </article>
+        
+      </div>
+    </div>
+    
+  </body>
+
+</html>
