@@ -8,13 +8,13 @@ angular.module('leroLeroApp')
   .factory('geradorDeFrases', function () {
   var frases,
       i;
-      
+
   frases = [
     "Por outro lado, a consolidação das estruturas exige a precisão e a definição do sistema de formação de quadros que corresponde às necessidades.",
     "O incentivo ao avanço tecnológico, assim como o entendimento das metas propostas promove a alavancagem dos índices pretendidos.",
     "As experiências acumuladas demonstram que a valorização de fatores subjetivos aponta para a melhoria das direções preferenciais no sentido do progresso."
   ];
- 
+
   return {
     get: function() {
       return frases;
@@ -30,7 +30,7 @@ angular.module('leroLeroApp')
   .controller('MainCtrl', function ($scope, geradorDeFrases) {
 
     var i = 0;
-    
+
     $scope.frases = geradorDeFrases.get();
 
     $scope.gerarFrase = function () {
@@ -42,12 +42,13 @@ angular.module('leroLeroApp')
         i = 0;
       }
     };
-    
+
     $scope.gerarFrase();
 
   });
-  
-  
+
+
+
 angular.module("leroLeroApp")
   .directive('tweetLink', function() {
     return {
@@ -58,12 +59,8 @@ angular.module("leroLeroApp")
         scope.$watch('sentence', function() {
           element.attr('href',
             'http://twitter.com/home?status='+
-            scope.sentence);  
+            scope.sentence);
         });
       }
-    }  
+    }
   });
-  
-  
-  
-  
