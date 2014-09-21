@@ -1,5 +1,4 @@
-﻿describe('Service: geradorDeFrases',
-  function(){
+﻿describe('Service: geradorDeFrases', function(){
  
   // Instancia o módulo com o serviço
   beforeEach(module('leroLeroApp'));
