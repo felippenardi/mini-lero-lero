@@ -1,8 +1,8 @@
 ﻿describe('Service: geradorDeFrases', function(){
- 
+
   // Instancia o módulo com o serviço
   beforeEach(module('leroLeroApp'));
-  
+
   // Instancia o serviço
   var geradorDeFrases;
   beforeEach(inject(
@@ -10,12 +10,12 @@
       geradorDeFrases = _geradorDeFrases_;
     }
   ));
-  
+
   it('fornece frases', function(){
     expect(geradorDeFrases.get())
       .toEqual(jasmine.any(Array));
   });
-  
+
 });
 
 
@@ -27,15 +27,15 @@ describe('Controller: MainCtrl', function() {
   var scope,
       MainCtrl,
       geradorMock;
-      
+
   geradorMock = {
     get: function() {
       return ["A","B","C"]
     }
   }; 
-  
+
   beforeEach(module('leroLeroApp'));
- 
+
   beforeEach(inject(
       function ($controller, $rootScope) {
        'use strict';
@@ -46,30 +46,31 @@ describe('Controller: MainCtrl', function() {
       }
     );
   }));
-  
+
   it('começa com uma frase', function() {
    expect(scope.frase)
     .toEqual(jasmine.any(String));
   });
-  
+
   it('gera nova a frase', function() {
    var primeiraFrase = scope.frase,
        segundaFrase;
-    
+
    scope.gerarFrase();
    segundaFrase = scope.frase;
-   
+
    expect(primeiraFrase).not.toEqual(segundaFrase);
   });
-  
+
   it('gera infinitas frases', function() {
     var i = 3;
     do { scope.gerarFrase() } while (--i);  
-    
+
     expect(scope.frase).toBeDefined();
   });
-  
+
 });
+
 
 
 
