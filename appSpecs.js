@@ -1,19 +1,38 @@
 ﻿describe('Service: geradorDeFrases', function(){
+  var geradorDeFrases,
+      httpBackend;
 
   // Instancia o módulo com o serviço
   beforeEach(module('leroLeroApp'));
 
   // Instancia o serviço
-  var geradorDeFrases;
   beforeEach(inject(
-    function(_geradorDeFrases_){
+    function(_geradorDeFrases_, $httpBackend){
       geradorDeFrases = _geradorDeFrases_;
+      httpBackend = $httpBackend;
     }
   ));
 
+  afterEach(function (){
+    httpBackend.verifyNoOutstandingExpectation();
+    httpBackend.verifyNoOutstandingRequest();
+  });
+
   it('fornece frases', function(){
-    expect(geradorDeFrases.get())
-      .toEqual(jasmine.any(Array));
+    var frases;
+
+    httpBackend.expectGET('frases.json').respond([
+      "Frase 1", "Frase 2", "Frase 3"
+    ]);
+
+    geradorDeFrases.get().then(function(response) {
+      frases = response;
+    });
+
+    httpBackend.flush();
+    expect(frases).toEqual(jasmine.any(Array));
+    expect(frases.length).toBe(3);
+
   });
 
 });
@@ -26,35 +45,42 @@
 describe('Controller: MainCtrl', function() {
   var scope,
       MainCtrl,
-      geradorMock;
+      geradorMock,
+      q;
 
   geradorMock = {
     get: function() {
-      return ["A","B","C"]
+      var frases = q.defer();
+      frases.resolve(["A","B","C"]);
+      return frases.promise;
     }
   };
 
   beforeEach(module('leroLeroApp'));
 
   beforeEach(inject(
-      function ($controller, $rootScope) {
-       'use strict';
-        scope = $rootScope.$new();
-        MainCtrl = $controller('MainCtrl', {
-          $scope: scope,
-          geradorDeFrases: geradorMock
-      }
-    );
-  }));
+    function ($controller, $rootScope, $q) {
+      q = $q;
+      scope = $rootScope.$new();
+
+      MainCtrl = $controller('MainCtrl', {
+        $scope: scope,
+                geradorDeFrases: geradorMock
+      });
+
+      scope.$apply();
+    }
+  ));
 
   it('começa com uma frase', function() {
-   expect(scope.frase)
-    .toEqual(jasmine.any(String));
+    expect(scope.frase)
+      .toEqual(jasmine.any(String));
   });
 
   it('gera nova a frase', function() {
    var primeiraFrase = scope.frase,
        segundaFrase;
+
 
    scope.gerarFrase();
    segundaFrase = scope.frase;

@@ -5,19 +5,17 @@
 
 
 angular.module('leroLeroApp')
-  .factory('geradorDeFrases', function () {
-  var frases,
-      i;
+  .factory('geradorDeFrases', function ($http) {
+  var promise;
 
-  frases = [
-    "Por outro lado, a consolidação das estruturas exige a precisão e a definição do sistema de formação de quadros que corresponde às necessidades.",
-    "O avanço tecnológico, assim como o entendimento das metas propostas, promovem alavancagem dos índices pretendidos.",
-    "As experiências acumuladas demonstram que a valorização de fatores subjetivos aponta para a melhoria das direções preferenciais no sentido do progresso."
-  ];
+  var promise = $http.get('frases.json')
+    .then(function (response) {
+      return response.data;
+    });
 
   return {
     get: function() {
-      return frases;
+      return promise;
     }
   };
 });
@@ -29,22 +27,23 @@ angular.module('leroLeroApp')
 angular.module('leroLeroApp')
   .controller('MainCtrl', function ($scope, geradorDeFrases) {
 
-    var i = 0;
+    var i = 0,
+        frases;
 
-    $scope.frases = geradorDeFrases.get();
+    geradorDeFrases.get().then(function(response){
+      frases = response;
+      $scope.gerarFrase();
+    });
 
     $scope.gerarFrase = function () {
       $scope.frase =
-        $scope.frases[i];
-      if (i < $scope.frases.length - 1) {
+        frases[i];
+      if (i < frases.length - 1) {
         i++;
       } else {
         i = 0;
       }
     };
-
-    $scope.gerarFrase();
-
   });
 
 
