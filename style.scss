@@ -1,0 +1,128 @@
+﻿body { margin: 0; padding: 0; }
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding-top: 280px;
+  width: 100%;
+  position: relative;
+  min-height: 330px;
+  background: #FFF;
+  z-index: 0;
+}
+.content {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+  justify-content: center;
+  //align-items: center;
+  max-width: 800px;
+  min-height: 145px;
+  padding: 0 30px;
+  &:after {
+    content: '';
+    background-color: green;
+    display: block;
+    border: 4px solid green;
+    background: #EAE9D8;  
+    border: solid 1px #d3d0c2;
+    position: absolute;
+    /* top: 100px; */
+    left: 0;
+    right: 0;
+    height: 100%;
+    @media (min-width:  840px) {
+      height: 145px;
+    }
+     @media (min-width: 750px)
+     and (max-width: 840px) {
+      height: 215px;
+    }
+    @media (min-width: 650px)
+     and (max-width: 750px) {
+      height: 255px;
+    }
+    padding: 20px;
+    z-index: -1;
+  }
+}
+
+.main { 
+  position: relative;
+  flex: 5 0px;
+  order: 1;
+  text-align: left;
+}
+.side {
+  position: relative;
+  flex: 3 60px; order: 2;
+}
+
+.frase {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/78860/quotes.png) no-repeat;
+  padding-left: 100px;
+  font-size: 20px;
+  color: #56554D;
+  text-shadow: 0 1px 1px white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+
+.tweet-button {
+  position: absolute;
+  top: 93px;
+  left: 36px;
+  text-indent: -5000px;
+  overflow: hidden;
+  background: url('tweet-button.png');
+  width: 84px;
+  height: 20px;
+}
+
+// Animação louca da ovelinha tremendo
+@keyframes shake {
+  0%   { transform: translateX(0px); }
+  25%   { transform: translateX(-20px); }
+  60%   { transform: translateX(10px); }
+  100% { transform: translateX(0px);  }
+}
+
+.ovelha {
+  order: 2;
+  cursor: pointer;
+  position: absolute;
+  top: -40px;
+  display: block;
+  a {
+    margin: -15px auto;
+    text-indent: -5000px;
+    overflow: hidden;
+    display: block;
+    height: 322px;
+    width: 178px;
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/78860/ovelha.png) no-repeat;
+    user-select: none; // Impedir seleção
+
+    &:not(:active) { // Faz ovelha tremer ao clicar
+      animation: shake 121ms 2 cubic-bezier(1.215, 0.61, 0.355, 1);
+    }
+  }
+  h1 {
+    position: absolute;
+    top: -110px;
+    right: -90px;
+    text-indent: -5000px;
+    overflow: hidden;
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/78860/logo.png');
+    width: 372px;
+    height: 94px;
+    user-select: none; // Impedir seleção 
+  }
+}
+
+// Melhora a visualização dos testes jasmine
+#HTMLReporter {
+ margin-bottom: 200px;
+ zoom: 140%;
+}
+
