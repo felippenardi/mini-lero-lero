@@ -65,7 +65,7 @@ describe('Controller: MainCtrl', function() {
 
       MainCtrl = $controller('MainCtrl', {
         $scope: scope,
-                geradorDeFrases: geradorMock
+        geradorDeFrases: geradorMock
       });
 
       scope.$apply();
@@ -73,26 +73,26 @@ describe('Controller: MainCtrl', function() {
   ));
 
   it('começa com uma frase', function() {
-    expect(scope.frase)
+    expect(scope.frase.atual)
       .toEqual(jasmine.any(String));
   });
 
   it('gera nova a frase', function() {
-   var primeiraFrase = scope.frase,
+   var primeiraFrase = scope.frase.atual,
        segundaFrase;
 
 
-   scope.gerarFrase();
-   segundaFrase = scope.frase;
+   scope.frase.gerar();
+   segundaFrase = scope.frase.atual;
 
    expect(primeiraFrase).not.toEqual(segundaFrase);
   });
 
   it('gera infinitas frases', function() {
     var i = 3;
-    do { scope.gerarFrase() } while (--i);
+    do { scope.frase.gerar() } while (--i);
 
-    expect(scope.frase).toBeDefined();
+    expect(scope.frase.atual).toBeDefined();
   });
 
 });

@@ -32,11 +32,13 @@ angular.module('leroLeroApp')
 
     geradorDeFrases.get().then(function(response){
       frases = response;
-      $scope.gerarFrase();
+      $scope.frase.gerar();
     });
 
-    $scope.gerarFrase = function () {
-      $scope.frase =
+    $scope.frase = {};
+
+    $scope.frase.gerar = function () {
+      $scope.frase.atual =
         frases[i];
       if (i < frases.length - 1) {
         i++;
