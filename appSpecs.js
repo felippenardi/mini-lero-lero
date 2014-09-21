@@ -114,9 +114,33 @@ describe("Directive: tweetLink",
       
       expect(element.css('display')).toBe('inherit');
     });  
+
+    it('codifica frase para URL', function() {
+      scope.frase = " #";
+      scope.$apply();
+
+      expect(element.attr('href'))
+        .toEqual(twitterUrl + '%20%23');
+    });
       
   });
 
 
 
+describe('Filter: tweet', function() {
+  var tweet;
 
+  beforeEach(module('leroLeroApp'));
+
+  beforeEach(inject(
+    function(tweetFilter) {
+      tweet = tweetFilter;
+    }
+  ));
+
+  it('adiciona aspas e hashtag', function() {
+    expect(tweet('Não obstante'))
+      .toBe('"Não obstante" #lerolero');
+  });
+
+});

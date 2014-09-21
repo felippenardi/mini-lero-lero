@@ -11,7 +11,7 @@ angular.module('leroLeroApp')
 
   frases = [
     "Por outro lado, a consolidação das estruturas exige a precisão e a definição do sistema de formação de quadros que corresponde às necessidades.",
-    "O incentivo ao avanço tecnológico, assim como o entendimento das metas propostas promove a alavancagem dos índices pretendidos.",
+    "O avanço tecnológico, assim como o entendimento das metas propostas, promovem alavancagem dos índices pretendidos.",
     "As experiências acumuladas demonstram que a valorização de fatores subjetivos aponta para a melhoria das direções preferenciais no sentido do progresso."
   ];
 
@@ -63,9 +63,16 @@ angular.module("leroLeroApp")
             element.css('display','inherit');
             element.attr('href',
               'http://twitter.com/home?status='+
-              scope.sentence);
+              encodeURIComponent(scope.sentence));
           }
         });
       }
     }
+  });
+
+angular.module("leroLeroApp")
+  .filter('tweet', function() {
+    return function(input) {
+      return '"' + input + '" #lerolero';
+    };
   });
