@@ -53,13 +53,18 @@ angular.module("leroLeroApp")
   .directive('tweetLink', function() {
     return {
       scope: {
-        sentence: "="
+        sentence: "@"
       },
       link: function (scope, element) {
         scope.$watch('sentence', function() {
-          element.attr('href',
-            'http://twitter.com/home?status='+
-            scope.sentence);
+          if (scope.sentence.length > 140) {
+            element.css('display','none');
+          } else {
+            element.css('display','inherit');
+            element.attr('href',
+              'http://twitter.com/home?status='+
+              scope.sentence);
+          }
         });
       }
     }

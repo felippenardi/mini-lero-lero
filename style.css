@@ -41,6 +41,7 @@
         height: 255px; } }
 
 .main {
+  position: relative;
   flex: 5 0px;
   order: 1;
   text-align: left; }
@@ -58,6 +59,16 @@
   text-shadow: 0 1px 1px white;
   font-family: Arial, Helvetica, sans-serif;
   font-style: italic; }
+
+.tweet-button {
+  position: absolute;
+  top: 93px;
+  left: 36px;
+  text-indent: -5000px;
+  overflow: hidden;
+  background: url("tweet-button.png");
+  width: 84px;
+  height: 20px; }
 
 @keyframes shake {
   0% {

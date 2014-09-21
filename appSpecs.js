@@ -86,9 +86,10 @@ describe("Directive: tweetLink",
     beforeEach(inject(
       function($compile, $rootScope){
         scope = $rootScope.$new();
+
         element = angular.element(
           "<a tweet-link " +
-          "sentence='frase'>" +
+          "sentence='{{frase}}'>" +
           "tweet</a>");
         $compile(element)(scope);
         scope.$digest();
@@ -96,17 +97,23 @@ describe("Directive: tweetLink",
     ));
     
     it('linka frase pro twitter', function() {
-      scope.frase = "Não obstante";
+      scope.frase = "teste";
+      scope.$apply();
 
       expect(element.attr('href'))
         .toEqual(twitterUrl + scope.frase);
     });
     
-    it('oculta link se não couber', function (){
+    it('oculta link se não couber num tweet', function (){
       scope.frase = "Por outro lado, a consolidação das estruturas exige a precisão e a definição do sistema de formação de quadros que corresponde às necessid...";  
       scope.$apply();
       
-      expect(element.attr())
+      expect(element.css('display')).toBe('none');
+
+      scope.frase = "Não obstante.";  
+      scope.$apply();
+      
+      expect(element.css('display')).toBe('inherit');
     });  
       
   });
