@@ -1,4 +1,4 @@
-﻿describe('Service: geradorDeFrases', function(){
+﻿describe('Service: Gerador De Frases', function(){
   var geradorDeFrases,
       httpBackend;
 
@@ -48,14 +48,6 @@ describe('Controller: MainCtrl', function() {
       geradorMock,
       q;
 
-  geradorMock = {
-    get: function() {
-      var frases = q.defer();
-      frases.resolve(["A","B","C"]);
-      return frases.promise;
-    }
-  };
-
   beforeEach(module('leroLeroApp'));
 
   beforeEach(inject(
@@ -71,6 +63,14 @@ describe('Controller: MainCtrl', function() {
       scope.$apply();
     }
   ));
+
+  geradorMock = {
+    get: function() {
+      var frases = q.defer();
+      frases.resolve(["A","B","C"]);
+      return frases.promise;
+    }
+  };
 
   it('começa com uma frase', function() {
     expect(scope.frase.atual)
@@ -89,7 +89,7 @@ describe('Controller: MainCtrl', function() {
   });
 
   it('gera infinitas frases', function() {
-    var i = 3;
+    var i = 4;
     do { scope.frase.gerar() } while (--i);
 
     expect(scope.frase.atual).toBeDefined();

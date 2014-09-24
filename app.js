@@ -27,23 +27,17 @@ angular.module('leroLeroApp')
 angular.module('leroLeroApp')
   .controller('MainCtrl', function ($scope, geradorDeFrases) {
 
-    var i = 0,
-        frases;
+    var i = 0, frases;
 
     geradorDeFrases.get().then(function(response){
       frases = response;
       $scope.frase.gerar();
     });
 
-    $scope.frase = {};
-
-    $scope.frase.gerar = function () {
-      $scope.frase.atual =
-        frases[i];
-      if (i < frases.length - 1) {
-        i++;
-      } else {
-        i = 0;
+    $scope.frase = {
+      gerar: function() {
+        $scope.frase.atual = frases[i];
+        i < frases.length - 1 ? i++ : i = 0;
       }
     };
   });

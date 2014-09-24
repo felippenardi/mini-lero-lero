@@ -2,6 +2,7 @@
 <html ng-app="leroLeroApp">
 
   <head>
+    <title>Gerador de Lero Lero</title>
     <link rel="stylesheet" href="style.css">
     <script src="prefixfree.min.js"></script>
     
@@ -19,7 +20,7 @@
           
             <h1>Lero Lero</h1>
             
-            <a ng-click="gerarFrase()" href="">
+            <a ng-click="frase.gerar()" href="">
               Gerar frase
             </a>
             
@@ -28,11 +29,11 @@
         
         <article class="main">
           <blockquote class="frase">
-            {{ frase }}
+            {{ frase.atual }}
           </blockquote>  
 
           <a tweet-link class="tweet-button" target="_blank"
-             sentence="{{ frase | tweet }}">Tuitar</a>
+             sentence="{{ frase.atual | tweet }}">Tuitar</a>
              
         </article>
         
