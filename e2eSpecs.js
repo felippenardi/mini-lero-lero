@@ -1,12 +1,35 @@
-describe('angularjs homepage', function() {
+beforeEach(function() {
+  browser.get('http://localhost:8000/');
+});
+
+describe('gera frase', function() {
   it('should add one and two', function() {
-    browser.get('http://juliemr.github.io/protractor-demo/');
-    element(by.model('first')).sendKeys(1);
-    element(by.model('second')).sendKeys(2);
+    var frase1,
+    frase2;
 
-    element(by.id('gobutton')).click();
+  element(by.binding('frase.atual')).getText()
+    .then(function(frase) {
+      frase1 = frase;
+    });
+  element(by.id('gerar-frase')).click();
+  element(by.binding('frase.atual')).getText()
+    .then(function(frase) {
+      frase2 = frase;
+      expect(frase1).not.toBe(frase2);
+    });
+  });
+});
 
-    expect(element(by.binding('latest')).getText()).
-        toEqual('5'); // This is wrong!
+describe('mostra butão do twitter', function() {
+  it('mostra botão do twitter', function() {
+    element(by.className('tweet-button')).getCssValue('display')
+      .then(function(display){
+        expect(display).toBe('none');
+      });
+    element(by.id('gerar-frase')).click();
+    element(by.className('tweet-button')).getCssValue('display')
+      .then(function(display){
+        expect(display).not.toBe('none');
+      });
   });
 });
